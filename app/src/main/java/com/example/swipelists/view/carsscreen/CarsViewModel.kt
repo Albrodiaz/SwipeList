@@ -22,6 +22,11 @@ class VehicleViewModel(private val carProvider: CarProvider) : ViewModel() {
         _carList.remove(car)
     }
 
+    fun addCar(car: Car) {
+        carProvider.addCar(car)
+        _carList.add(2, car)
+    }
+
     private fun loadCars() {
         _carList.addAll(carProvider.getCars())
     }

@@ -67,4 +67,8 @@ class CarProvider {
     fun deleteCar(car: Car) {
         carList.remove(car)
     }
+
+    fun addCar(car: Car) {
+        carList.add(2, car)
+    }
 }

@@ -11,7 +11,7 @@ fun MainScreen(vehicleViewModel: VehicleViewModel) {
     val scaffoldState = rememberScaffoldState()
     Scaffold(
         scaffoldState = scaffoldState,
-        topBar = { MainTopAppBar() },
+        topBar = { MainTopAppBar(vehicleViewModel = vehicleViewModel) },
         content = { CarScreen(vehicleViewModel = vehicleViewModel) }
     )
 }
