@@ -1,6 +1,6 @@
 package com.example.swipelists.view.carsscreen
 
-import android.widget.Toast
+import android.app.Activity
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,26 +22,23 @@ import androidx.compose.ui.zIndex
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.swipelists.domain.Car
+import com.example.swipelists.shorToast
 import kotlin.math.roundToInt
 
 @Composable
 fun CarScreen(vehicleViewModel: VehicleViewModel) {
-    val context = LocalContext.current
+    val activity = LocalContext.current as Activity
     val cars: List<Car> = vehicleViewModel.carList
     val isLoading: Boolean by vehicleViewModel.isLoading.observeAsState(true)
-    LazyColumn {
+    LazyColumn(Modifier.fillMaxSize()) {
         if (!isLoading) {
-            items(cars, key = { it.id!! }) { car ->
+            items(
+                items = cars,
+                key = { it.id!! }) { car ->
                 ItemCar(
                     car = car,
                     deleteCar = { vehicleViewModel.deleteCar(car) },
-                    showCar = {
-                        Toast.makeText(
-                            context,
-                            "Ver: ${it.brand} ${it.model}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                    showCar = { activity.shorToast("Ver: ${it.brand} ${it.model}") }
                 )
             }
         }

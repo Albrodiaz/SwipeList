@@ -1,10 +1,7 @@
 package com.example.swipelists.view.carsscreen
 
 import androidx.compose.runtime.mutableStateListOf
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.example.swipelists.domain.Car
 import com.example.swipelists.repository.CarProvider
 
@@ -16,13 +13,17 @@ class VehicleViewModel(private val carProvider: CarProvider) : ViewModel() {
     val carList: List<Car> get() = _carList
 
     init {
-        _carList.addAll(carProvider.getCars())
+        loadCars()
         _isLoading.value = false
     }
 
     fun deleteCar(car: Car) {
         carProvider.deleteCar(car)
         _carList.clear()
+        loadCars()
+    }
+
+    private fun loadCars() {
         _carList.addAll(carProvider.getCars())
     }
 }
