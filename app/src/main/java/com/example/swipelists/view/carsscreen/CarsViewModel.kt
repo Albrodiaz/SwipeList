@@ -17,10 +17,9 @@ class VehicleViewModel(private val carProvider: CarProvider) : ViewModel() {
         _isLoading.value = false
     }
 
-    fun deleteCar(car: Car) {
+    fun deleteCar(car: Car){
         carProvider.deleteCar(car)
-        _carList.clear()
-        loadCars()
+        _carList.remove(car)
     }
 
     private fun loadCars() {

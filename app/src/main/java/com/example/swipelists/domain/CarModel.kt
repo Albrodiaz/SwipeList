@@ -6,5 +6,6 @@ data class Car(
     val model: String? = null,
     val hp: Int? = null,
     val motor: Int? = null,
-    val photo: String? = null
+    val photo: String? = null,
+    val description: String? = null
 )
