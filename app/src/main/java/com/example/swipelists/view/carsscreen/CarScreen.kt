@@ -27,15 +27,21 @@ import kotlin.math.roundToInt
 @Composable
 fun CarScreen(vehicleViewModel: VehicleViewModel) {
     val context = LocalContext.current
-    val cars: List<Car> by vehicleViewModel.cars.observeAsState(emptyList())
+    val cars: List<Car> = vehicleViewModel.carList
     val isLoading: Boolean by vehicleViewModel.isLoading.observeAsState(true)
     LazyColumn {
         if (!isLoading) {
-            items(cars) { car ->
+            items(cars, key = { it.id!! }) { car ->
                 ItemCar(
                     car = car,
                     deleteCar = { vehicleViewModel.deleteCar(car) },
-                    showCar = { Toast.makeText(context, "Ver: ${it.brand} ${it.model}", Toast.LENGTH_SHORT).show() }
+                    showCar = {
+                        Toast.makeText(
+                            context,
+                            "Ver: ${it.brand} ${it.model}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 )
             }
         }
