@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.swipelists.domain.Car
 import com.example.swipelists.repository.CarProvider
 
-class VehicleViewModel(carProvider: CarProvider): ViewModel() {
+class VehicleViewModel(private val carProvider: CarProvider): ViewModel() {
     private val _cars = MutableLiveData<List<Car>>(emptyList())
     val cars: LiveData<List<Car>> get() = _cars
     private val _isLoading = MutableLiveData(true)
@@ -16,6 +16,11 @@ class VehicleViewModel(carProvider: CarProvider): ViewModel() {
     init {
         _cars.postValue(carProvider.getCars())
         _isLoading.value = false
+    }
+
+    fun deleteCar(car: Car) {
+        carProvider.deleteCar(car)
+        _cars.value = carProvider.getCars()
     }
 }
 

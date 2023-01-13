@@ -11,13 +11,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.swipelists.R
+import com.example.swipelists.domain.Car
 
 @Composable
-fun ActionsColumn(
-) {
+fun ActionsColumn(car: Car, showCar: (Car) -> Unit, deleteCar: (Car) -> Unit) {
     Column(
         Modifier
             .height(140.dp)
@@ -26,7 +25,7 @@ fun ActionsColumn(
     ) {
         IconButton(
             modifier = Modifier.size(75.dp),
-            onClick = { },
+            onClick = { deleteCar(car) },
             content = {
                 Icon(
                     modifier = Modifier.size(30.dp),
@@ -38,7 +37,7 @@ fun ActionsColumn(
         )
         IconButton(
             modifier = Modifier.size(75.dp),
-            onClick = {},
+            onClick = { showCar(car) },
             content = {
                 Icon(
                     modifier = Modifier.size(30.dp),
@@ -51,8 +50,9 @@ fun ActionsColumn(
     }
 }
 
+/*
 @Preview(showBackground = true)
 @Composable
 fun ActionPreview() {
     ActionsColumn()
-}
+}*/
