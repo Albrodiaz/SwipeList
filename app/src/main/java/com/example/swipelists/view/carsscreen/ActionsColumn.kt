@@ -1,9 +1,6 @@
 package com.example.swipelists.view.carsscreen
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
@@ -20,7 +17,7 @@ fun ActionsColumn(car: Car, showCar: (Car) -> Unit, deleteCar: (Car) -> Unit) {
     Column(
         Modifier
             .height(140.dp)
-            .fillMaxSize(),
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.End
     ) {
         IconButton(

@@ -1,6 +1,7 @@
 package com.example.swipelists.view.carsscreen
 
 import android.app.Activity
+import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.Orientation
@@ -64,14 +65,10 @@ fun ItemCar(car: Car, deleteCar: (Car) -> Unit, showCar: (Car) -> Unit) {
     val swipeableState = rememberSwipeableState(initialValue = 0)
     val width = 75.dp
     val sizePx = with(LocalDensity.current) { width.toPx() }
-    ActionsColumn(
-        car = car,
-        showCar = { showCar(car) },
-        deleteCar = { deleteCar(car) }
-    )
+
     Card(
         Modifier
-            .zIndex(if (swipeableState.targetValue == 1) -1f else 1f)
+            .zIndex(if (swipeableState.targetValue == 0) 1f else 0f)
             .swipeable(
                 state = swipeableState,
                 anchors = mapOf(0f to 0, -sizePx to 1),
@@ -102,4 +99,32 @@ fun ItemCar(car: Car, deleteCar: (Car) -> Unit, showCar: (Car) -> Unit) {
             }
         }
     }
+    AnimatedVisibility(
+        visible = swipeableState.targetValue == 1 && swipeableState.progress.fraction > 0.6,
+        enter = fadeIn(animationSpec = tween(800)),
+        exit = fadeOut(animationSpec = tween(1000))
+    ) {
+        ActionsColumn(
+            car = car,
+            showCar = { showCar(car) },
+            deleteCar = { deleteCar(car) }
+        )
+    }
 }
+
+
+/*ANIMACION DE DESLIZAMIENTO
+
+
+    AnimatedVisibility(
+            visible = swipeableState.targetValue == 1 && swipeableState.progress.fraction > 0.7,
+            enter = slideInHorizontally(animationSpec = tween(100), initialOffsetX = { 120 }),
+            exit = slideOutHorizontally(animationSpec = tween(500), targetOffsetX = { 150 })
+        ) {
+            ActionsColumn(
+                car = car,
+                showCar = { showCar(car) },
+                deleteCar = { deleteCar(car) }
+            )
+        }
+*/
