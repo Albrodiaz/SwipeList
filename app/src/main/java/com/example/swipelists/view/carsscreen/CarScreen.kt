@@ -12,13 +12,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.swipelists.domain.Car
 import com.example.swipelists.view.adddialog.AddDialog
 import com.example.swipelists.view.adddialog.AddViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun CarScreen(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
+fun CarScreen(
+    navigationController: NavHostController,
+    carsViewModel: CarsViewModel,
+    addViewModel: AddViewModel
+) {
     val cars: List<Car> = carsViewModel.carList
     val isLoading: Boolean by carsViewModel.isLoading.observeAsState(initial = true)
     val showDialog: Boolean by carsViewModel.showDialog.observeAsState(initial = false)
@@ -40,7 +45,10 @@ fun CarScreen(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
                     ItemCar(
                         car = car,
                         deleteCar = { carsViewModel.deleteCar(it) },
-                        showCar = {  }
+                        showCar = {
+                            carsViewModel.setCurrentCar(it)
+                            navigationController.navigate("detailScreen")
+                        }
                     )
                 }
             }

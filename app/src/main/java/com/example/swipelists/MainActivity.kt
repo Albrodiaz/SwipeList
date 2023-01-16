@@ -8,11 +8,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.swipelists.repository.CarProvider
 import com.example.swipelists.ui.theme.SwipeListsTheme
 import com.example.swipelists.view.adddialog.AddViewModel
 import com.example.swipelists.view.carsscreen.CarViewModelFactory
 import com.example.swipelists.view.carsscreen.CarsViewModel
+import com.example.swipelists.view.detailscreen.DetailScreen
 import com.example.swipelists.view.mainscreen.MainScreen
 
 class MainActivity : ComponentActivity() {
@@ -29,7 +33,18 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MainScreen(carsViewModel = carsViewModel, addViewModel = addViewModel)
+                    val navigationController = rememberNavController()
+                    NavHost(navController = navigationController, startDestination = "mainScreen") {
+                        composable("mainScreen") {
+                            MainScreen(
+                                navigationController = navigationController,
+                                carsViewModel = carsViewModel,
+                                addViewModel = addViewModel
+                            )
+                        }
+                        composable("detailScreen") { DetailScreen(carsViewModel = carsViewModel) }
+                    }
+                    //MainScreen(carsViewModel = carsViewModel, addViewModel = addViewModel)
                 }
             }
         }

@@ -6,6 +6,10 @@ import com.example.swipelists.domain.Car
 import com.example.swipelists.repository.CarProvider
 
 class CarsViewModel(private val carProvider: CarProvider) : ViewModel() {
+
+    private val _currentCar = MutableLiveData<Car>()
+    val currentCar: LiveData<Car> get() = _currentCar
+
     private val _isLoading = MutableLiveData(true)
     val isLoading: LiveData<Boolean> get() = _isLoading
 
@@ -18,6 +22,10 @@ class CarsViewModel(private val carProvider: CarProvider) : ViewModel() {
     init {
         loadCars()
         _isLoading.value = false
+    }
+
+    fun setCurrentCar(car: Car) {
+        _currentCar.value = car
     }
 
     fun deleteCar(car: Car) {
@@ -40,7 +48,7 @@ class CarsViewModel(private val carProvider: CarProvider) : ViewModel() {
 }
 
 @Suppress("UNCHECKED_CAST")
-class CarViewModelFactory(private val carProvider: CarProvider) : ViewModelProvider.Factory {
+class CarViewModelFactory(private val carProvider: CarProvider) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return CarsViewModel(carProvider) as T
     }
