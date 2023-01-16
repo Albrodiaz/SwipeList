@@ -10,15 +10,17 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.example.swipelists.repository.CarProvider
 import com.example.swipelists.ui.theme.SwipeListsTheme
+import com.example.swipelists.view.adddialog.AddViewModel
 import com.example.swipelists.view.carsscreen.CarViewModelFactory
-import com.example.swipelists.view.carsscreen.VehicleViewModel
+import com.example.swipelists.view.carsscreen.CarsViewModel
 import com.example.swipelists.view.mainscreen.MainScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val vehicleViewModel: VehicleViewModel by viewModels { CarViewModelFactory(CarProvider()) }
+        val carsViewModel: CarsViewModel by viewModels { CarViewModelFactory(CarProvider()) }
+        val addViewModel: AddViewModel by viewModels()
 
         setContent {
             SwipeListsTheme {
@@ -27,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MainScreen(vehicleViewModel = vehicleViewModel)
+                    MainScreen(carsViewModel = carsViewModel, addViewModel = addViewModel)
                 }
             }
         }

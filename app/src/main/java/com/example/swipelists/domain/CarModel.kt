@@ -1,11 +1,11 @@
 package com.example.swipelists.domain
 
 data class Car(
-    val id: Long? = null,
+    val id: Long = System.currentTimeMillis(),
     val brand: String? = null,
     val model: String? = null,
-    val hp: Int? = null,
-    val motor: Int? = null,
+    val hp: String? = null,
+    val motor: String? = null,
     val photo: String? = null,
     val description: String? = null
 )
