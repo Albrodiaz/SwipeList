@@ -18,6 +18,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.example.swipelists.ui.theme.Shapes
 import com.example.swipelists.view.carsscreen.CarsViewModel
 
 @Composable
@@ -41,7 +42,7 @@ fun AddDialog(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
             Modifier
                 .fillMaxWidth()
                 .padding(12.dp)
-                .background(Color.White),
+                .background(color = Color.White, shape = Shapes.small),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             OutlinedTextField(
@@ -72,13 +73,7 @@ fun AddDialog(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
                 value = hPower,
                 label = { Text(text = "Caballos") },
                 onValueChange = {
-                    addViewModel.setCar(
-                        brandText,
-                        modelText,
-                        it,
-                        motorText,
-                        imageUrl
-                    )
+                    addViewModel.setCar(brandText, modelText, it, motorText, imageUrl)
                 },
                 modifier = Modifier.padding(6.dp),
                 singleLine = true,
@@ -102,13 +97,7 @@ fun AddDialog(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
                 value = imageUrl,
                 label = { Text(text = "Url de la imagen") },
                 onValueChange = {
-                    addViewModel.setCar(
-                        brandText,
-                        modelText,
-                        hPower,
-                        motorText,
-                        it
-                    )
+                    addViewModel.setCar(brandText, modelText, hPower, motorText, it)
                 },
                 modifier = Modifier.padding(6.dp),
                 singleLine = true,
@@ -120,14 +109,7 @@ fun AddDialog(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
             OutlinedTextField(
                 value = description,
                 onValueChange = {
-                    addViewModel.setCar(
-                        brandText,
-                        modelText,
-                        hPower,
-                        motorText,
-                        imageUrl,
-                        it
-                    )
+                    addViewModel.setCar(brandText, modelText, hPower, motorText, imageUrl, it)
                 },
                 label = { Text(text = "Descripción") },
                 modifier = Modifier.padding(6.dp),
@@ -138,7 +120,10 @@ fun AddDialog(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
             )
             OutlinedButton(
                 modifier = Modifier.padding(12.dp),
-                onClick = { carsViewModel.addCar(addViewModel.createCar()) },
+                onClick = {
+                    carsViewModel.addCar(addViewModel.createCar())
+                    carsViewModel.showDialog()
+                },
                 enabled = buttonActivated
             ) {
                 Text(text = "Guardar")
