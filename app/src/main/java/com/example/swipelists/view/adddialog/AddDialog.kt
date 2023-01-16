@@ -48,7 +48,7 @@ fun AddDialog(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
             OutlinedTextField(
                 value = brandText,
                 label = { Text(text = "Marca") },
-                onValueChange = { addViewModel.setCar(it, modelText, hPower, motorText, imageUrl) },
+                onValueChange = { addViewModel.setCarForm(it, modelText, hPower, motorText, imageUrl) },
                 modifier = Modifier.padding(6.dp),
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(
@@ -60,7 +60,7 @@ fun AddDialog(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
             OutlinedTextField(
                 value = modelText,
                 label = { Text(text = "Modelo") },
-                onValueChange = { addViewModel.setCar(brandText, it, hPower, motorText, imageUrl) },
+                onValueChange = { addViewModel.setCarForm(brandText, it, hPower, motorText, imageUrl) },
                 modifier = Modifier.padding(6.dp),
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(
@@ -73,7 +73,7 @@ fun AddDialog(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
                 value = hPower,
                 label = { Text(text = "Caballos") },
                 onValueChange = {
-                    addViewModel.setCar(brandText, modelText, it, motorText, imageUrl)
+                    addViewModel.setCarForm(brandText, modelText, it, motorText, imageUrl)
                 },
                 modifier = Modifier.padding(6.dp),
                 singleLine = true,
@@ -85,7 +85,7 @@ fun AddDialog(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
             OutlinedTextField(
                 value = motorText,
                 label = { Text(text = "Motor") },
-                onValueChange = { addViewModel.setCar(brandText, modelText, hPower, it, imageUrl) },
+                onValueChange = { addViewModel.setCarForm(brandText, modelText, hPower, it, imageUrl) },
                 modifier = Modifier.padding(6.dp),
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(
@@ -97,7 +97,7 @@ fun AddDialog(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
                 value = imageUrl,
                 label = { Text(text = "Url de la imagen") },
                 onValueChange = {
-                    addViewModel.setCar(brandText, modelText, hPower, motorText, it)
+                    addViewModel.setCarForm(brandText, modelText, hPower, motorText, it)
                 },
                 modifier = Modifier.padding(6.dp),
                 singleLine = true,
@@ -109,7 +109,7 @@ fun AddDialog(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
             OutlinedTextField(
                 value = description,
                 onValueChange = {
-                    addViewModel.setCar(brandText, modelText, hPower, motorText, imageUrl, it)
+                    addViewModel.setCarForm(brandText, modelText, hPower, motorText, imageUrl, it)
                 },
                 label = { Text(text = "Descripción") },
                 modifier = Modifier.padding(6.dp),

@@ -39,7 +39,7 @@ class AddViewModel : ViewModel() {
         )
     }
 
-    fun setCar(
+    fun setCarForm(
         brand: String,
         model: String,
         hp: String,
