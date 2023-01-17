@@ -57,4 +57,13 @@ class AddViewModel : ViewModel() {
         _buttonActivated.value =
             brand.isNotEmpty() && model.isNotEmpty() && hp.isNotEmpty() && motor.isNotEmpty() && image.isNotEmpty()
     }
+
+    fun clearForm() {
+        _brandText.value = ""
+        _modelText.value = ""
+        _horsePowerText.value = ""
+        _motorText.value = ""
+        _imageUrl.value = ""
+        _descriptionText.value = ""
+    }
 }

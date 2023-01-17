@@ -34,7 +34,10 @@ fun AddDialog(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
     val buttonActivated: Boolean by addViewModel.buttonActivated.observeAsState(false)
 
     Dialog(
-        onDismissRequest = { carsViewModel.showDialog() },
+        onDismissRequest = {
+            carsViewModel.showDialog()
+            addViewModel.clearForm()
+        },
         properties = DialogProperties(
             dismissOnBackPress = false,
             dismissOnClickOutside = true
@@ -74,9 +77,7 @@ fun AddDialog(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
             OutlinedTextField(
                 value = hPower,
                 label = { Text(text = "Caballos") },
-                onValueChange = {
-                    addViewModel.setCarForm(brandText, modelText, it, motorText, imageUrl)
-                },
+                onValueChange = { addViewModel.setCarForm(brandText, modelText, it, motorText, imageUrl) },
                 modifier = Modifier.padding(6.dp),
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(
@@ -98,9 +99,7 @@ fun AddDialog(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
             OutlinedTextField(
                 value = imageUrl,
                 label = { Text(text = "Url de la imagen") },
-                onValueChange = {
-                    addViewModel.setCarForm(brandText, modelText, hPower, motorText, it)
-                },
+                onValueChange = { addViewModel.setCarForm(brandText, modelText, hPower, motorText, it) },
                 modifier = Modifier.padding(6.dp),
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(
@@ -110,9 +109,7 @@ fun AddDialog(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
             )
             OutlinedTextField(
                 value = description,
-                onValueChange = {
-                    addViewModel.setCarForm(brandText, modelText, hPower, motorText, imageUrl, it)
-                },
+                onValueChange = { addViewModel.setCarForm(brandText, modelText, hPower, motorText, imageUrl, it) },
                 label = { Text(text = "Descripción") },
                 modifier = Modifier.padding(6.dp),
                 keyboardOptions = KeyboardOptions(
@@ -125,6 +122,7 @@ fun AddDialog(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
                 onClick = {
                     carsViewModel.addCar(addViewModel.createCar())
                     carsViewModel.showDialog()
+                    addViewModel.clearForm()
                 },
                 enabled = buttonActivated
             ) {

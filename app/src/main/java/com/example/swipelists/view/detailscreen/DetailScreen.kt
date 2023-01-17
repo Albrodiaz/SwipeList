@@ -51,7 +51,7 @@ fun DetailScreen(carsViewModel: CarsViewModel) {
             }
             Spacer(modifier = Modifier.height(12.dp))
             Text(
-                text = car.description.toString(),
+                text = car.description ?: "Sin descripción",
                 style = TextStyle(fontSize = 18.sp, fontStyle = FontStyle.Italic)
             )
         }

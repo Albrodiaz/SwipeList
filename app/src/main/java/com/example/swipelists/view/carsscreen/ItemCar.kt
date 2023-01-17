@@ -25,7 +25,7 @@ import kotlin.math.roundToInt
 @OptIn(ExperimentalGlideComposeApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun ItemCar(car: Car, deleteCar: (Car) -> Unit, showCar: (Car) -> Unit) {
-    val swipeableState = rememberSwipeableState(initialValue = 0)
+    val swipeableState = rememberSwipeableState(initialValue = 0) //0 colapsado, 1 expandido
     val width = 75.dp
     val sizePx = with(LocalDensity.current) { width.toPx() }
 
