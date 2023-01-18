@@ -14,7 +14,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.swipelists.repository.CarProvider
 import com.example.swipelists.ui.theme.SwipeListsTheme
 import com.example.swipelists.view.adddialog.AddViewModel
-import com.example.swipelists.view.carsscreen.CarScreen
 import com.example.swipelists.view.carsscreen.CarViewModelFactory
 import com.example.swipelists.view.carsscreen.CarsViewModel
 import com.example.swipelists.view.detailscreen.DetailScreen
@@ -43,11 +42,6 @@ class MainActivity : ComponentActivity() {
                                 addViewModel = addViewModel
                             )
                         }
-                        composable("carsScreen") { CarScreen(
-                            navigationController = navigationController,
-                            carsViewModel = carsViewModel,
-                            addViewModel = addViewModel
-                        )}
                         composable("detailScreen") { DetailScreen(carsViewModel = carsViewModel, navigationController = navigationController) }
                     }
                 }

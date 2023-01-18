@@ -60,6 +60,6 @@ fun DetailScreen(carsViewModel: CarsViewModel, navigationController: NavHostCont
     }
 
     BackHandler {
-        navigationController.navigate("carsScreen")
+        navigationController.navigate("mainScreen")
     }
 }
