@@ -14,7 +14,7 @@ fun MainTopAppBar(carsViewModel: CarsViewModel) {
     TopAppBar(
         title = { Text(text = "Garaje") },
         actions = {
-            IconButton(onClick = { carsViewModel.showDialog() }) {
+            IconButton(onClick = { carsViewModel.setDialogEnabled() }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_add),
                     contentDescription = "Add car"

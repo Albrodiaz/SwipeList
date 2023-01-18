@@ -58,6 +58,10 @@ class AddViewModel : ViewModel() {
             brand.isNotEmpty() && model.isNotEmpty() && hp.isNotEmpty() && motor.isNotEmpty() && image.isNotEmpty()
     }
 
+    fun setDescription(description: String) {
+        _descriptionText.value = description
+    }
+
     fun clearForm() {
         _brandText.value = ""
         _modelText.value = ""

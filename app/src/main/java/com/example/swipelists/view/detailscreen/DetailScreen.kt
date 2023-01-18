@@ -45,9 +45,9 @@ fun DetailScreen(carsViewModel: CarsViewModel) {
             )
             Spacer(modifier = Modifier.height(12.dp))
             Row(Modifier.fillMaxWidth()) {
-                Text(text = car.hp.toString(), style = TextStyle(fontSize = 18.sp))
+                Text(text = "${car.hp.toString()} Cv", style = TextStyle(fontSize = 18.sp))
                 Spacer(modifier = Modifier.width(12.dp))
-                Text(text = car.motor.toString(), style = TextStyle(fontSize = 18.sp))
+                Text(text = "${car.motor.toString()} Cc", style = TextStyle(fontSize = 18.sp))
             }
             Spacer(modifier = Modifier.height(12.dp))
             Text(

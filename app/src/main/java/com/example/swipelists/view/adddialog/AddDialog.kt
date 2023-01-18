@@ -4,9 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.OutlinedButton
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,9 +12,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
@@ -35,7 +30,7 @@ fun AddDialog(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
 
     Dialog(
         onDismissRequest = {
-            carsViewModel.showDialog()
+            carsViewModel.setDialogEnabled()
             addViewModel.clearForm()
         },
         properties = DialogProperties(
@@ -50,78 +45,35 @@ fun AddDialog(carsViewModel: CarsViewModel, addViewModel: AddViewModel) {
                 .background(color = Color.White, shape = Shapes.small),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            OutlinedTextField(
+            TextFieldNext(
                 value = brandText,
-                label = { Text(text = "Marca") },
-                onValueChange = { addViewModel.setCarForm(it, modelText, hPower, motorText, imageUrl) },
-                modifier = Modifier.padding(6.dp),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.Words,
-                    keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Next
-                )
-            )
-            OutlinedTextField(
+                valueChange = {addViewModel.setCarForm(it, modelText, hPower, motorText, imageUrl)},
+                label = "Marca*" )
+            TextFieldNext(
                 value = modelText,
-                label = { Text(text = "Modelo") },
-                onValueChange = { addViewModel.setCarForm(brandText, it, hPower, motorText, imageUrl) },
-                modifier = Modifier.padding(6.dp),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.Words,
-                    keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Next
-                )
-            )
-            OutlinedTextField(
+                valueChange = { addViewModel.setCarForm(brandText, it, hPower, motorText, imageUrl ) },
+                label = "Modelo*")
+            TextFieldNext(
                 value = hPower,
-                label = { Text(text = "Caballos") },
-                onValueChange = { addViewModel.setCarForm(brandText, modelText, it, motorText, imageUrl) },
-                modifier = Modifier.padding(6.dp),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                    imeAction = ImeAction.Next
-                )
-            )
-            OutlinedTextField(
+                valueChange = { addViewModel.setCarForm(brandText, modelText, it, motorText, imageUrl ) },
+                label = "Potencia*")
+            TextFieldNext(
                 value = motorText,
-                label = { Text(text = "Motor") },
-                onValueChange = { addViewModel.setCarForm(brandText, modelText, hPower, it, imageUrl) },
-                modifier = Modifier.padding(6.dp),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                    imeAction = ImeAction.Next
-                )
-            )
-            OutlinedTextField(
+                valueChange = { addViewModel.setCarForm(brandText, modelText, hPower, it, imageUrl ) },
+                label = "Motor*")
+            TextFieldNext(
                 value = imageUrl,
-                label = { Text(text = "Url de la imagen") },
-                onValueChange = { addViewModel.setCarForm(brandText, modelText, hPower, motorText, it) },
-                modifier = Modifier.padding(6.dp),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Uri,
-                    imeAction = ImeAction.Next
-                )
-            )
-            OutlinedTextField(
+                valueChange = { addViewModel.setCarForm(brandText, modelText, hPower, motorText, it ) },
+                label = "Url de imagen*")
+            TextFieldDone(
                 value = description,
-                onValueChange = { addViewModel.setCarForm(brandText, modelText, hPower, motorText, imageUrl, it) },
-                label = { Text(text = "Descripción") },
-                modifier = Modifier.padding(6.dp),
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Done
-                )
-            )
+                valueChange = { addViewModel.setDescription(it) },
+                label = "Descripción")
             OutlinedButton(
                 modifier = Modifier.padding(12.dp),
                 onClick = {
                     carsViewModel.addCar(addViewModel.createCar())
-                    carsViewModel.showDialog()
+                    carsViewModel.setDialogEnabled()
                     addViewModel.clearForm()
                 },
                 enabled = buttonActivated

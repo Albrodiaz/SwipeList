@@ -42,7 +42,7 @@ class CarsViewModel(private val carProvider: CarProvider) : ViewModel() {
         _carList.addAll(carProvider.getCars())
     }
 
-    fun showDialog() {
+    fun setDialogEnabled() {
         _showDialog.value = !showDialog.value!!
     }
 }
