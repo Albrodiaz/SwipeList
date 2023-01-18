@@ -1,5 +1,6 @@
 package com.example.swipelists.view.detailscreen
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -10,13 +11,14 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.swipelists.view.carsscreen.CarsViewModel
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun DetailScreen(carsViewModel: CarsViewModel) {
+fun DetailScreen(carsViewModel: CarsViewModel, navigationController: NavHostController) {
     val car = carsViewModel.currentCar.value!!
 
     Column(Modifier.fillMaxSize()) {
@@ -55,5 +57,9 @@ fun DetailScreen(carsViewModel: CarsViewModel) {
                 style = TextStyle(fontSize = 18.sp, fontStyle = FontStyle.Italic)
             )
         }
+    }
+
+    BackHandler {
+        navigationController.navigate("carsScreen")
     }
 }
