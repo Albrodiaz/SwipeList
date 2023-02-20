@@ -4,8 +4,13 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.*
 import com.example.swipelists.domain.Car
 import com.example.swipelists.repository.CarProvider
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class CarsViewModel(private val carProvider: CarProvider) : ViewModel() {
+@HiltViewModel
+class CarsViewModel @Inject constructor(
+    private val carProvider: CarProvider
+) : ViewModel() {
 
     private val _currentCar = MutableLiveData<Car>()
     val currentCar: LiveData<Car> get() = _currentCar
@@ -47,9 +52,11 @@ class CarsViewModel(private val carProvider: CarProvider) : ViewModel() {
     }
 }
 
+/*
 @Suppress("UNCHECKED_CAST")
-class CarViewModelFactory(private val carProvider: CarProvider) : ViewModelProvider.NewInstanceFactory() {
+class CarViewModelFactory(private val carProvider: CarProvider) :
+    ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return CarsViewModel(carProvider) as T
     }
-}
+}*/

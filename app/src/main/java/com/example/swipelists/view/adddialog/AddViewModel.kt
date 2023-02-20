@@ -4,8 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.swipelists.domain.Car
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class AddViewModel : ViewModel() {
+@HiltViewModel
+class AddViewModel @Inject constructor(): ViewModel() {
 
     private val _brandText = MutableLiveData("")
     val brandText: LiveData<String> get() = _brandText

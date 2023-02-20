@@ -1,8 +1,9 @@
 package com.example.swipelists.repository
 
 import com.example.swipelists.domain.Car
+import javax.inject.Inject
 
-class CarProvider {
+class CarProvider @Inject constructor(){
     private val carList = mutableListOf(
         Car(
             1,

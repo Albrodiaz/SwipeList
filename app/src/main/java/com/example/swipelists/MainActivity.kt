@@ -11,19 +11,19 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.swipelists.repository.CarProvider
 import com.example.swipelists.ui.theme.SwipeListsTheme
 import com.example.swipelists.view.adddialog.AddViewModel
-import com.example.swipelists.view.carsscreen.CarViewModelFactory
 import com.example.swipelists.view.carsscreen.CarsViewModel
 import com.example.swipelists.view.detailscreen.DetailScreen
 import com.example.swipelists.view.mainscreen.MainScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val carsViewModel: CarsViewModel by viewModels { CarViewModelFactory(CarProvider()) }
+        val carsViewModel: CarsViewModel by viewModels()
         val addViewModel: AddViewModel by viewModels()
 
         setContent {
